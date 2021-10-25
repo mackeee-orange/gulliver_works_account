@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     end
   end
 
+  # Default Api
+  namespace :v1 do
+    resources :accounts, only: %i[show update destroy]
+  end
+
   namespace :enterprise_auth do
     namespace :v1 do
       post :sign_in, to: 'auth#sign_in'
