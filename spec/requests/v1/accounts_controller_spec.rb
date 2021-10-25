@@ -32,7 +32,7 @@ RSpec.describe V1::AccountsController, type: :request do
           let(:params) { { account: { email: 'hoge@example.com' } } }
           let!(:account) { create(:account, email: 'hoge@example.com') }
 
-          it 'アドレス確認メールが送信に失敗すること' do
+          it '失敗すること' do
             request
             expect(response).to have_http_status(:unprocessable_entity)
           end
@@ -42,7 +42,7 @@ RSpec.describe V1::AccountsController, type: :request do
 
     context '他人のアカウントの場合' do
       let(:target_account) { create(:account) }
-      let(:params) { { account: attributes_for(:account, skill_ids: [create(:skill).id]) } }
+      let(:params) { { account: attributes_for(:account, email: 'fuga@example.com') } }
 
       it 'アカウントを更新できないこと' do
         request
