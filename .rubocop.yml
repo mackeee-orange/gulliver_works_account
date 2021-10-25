@@ -1,0 +1,143 @@
+require:
+  - rubocop-rspec
+  - rubocop-rails
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'bin/*'
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'log/**/*'
+
+Style/AsciiComments:
+  Enabled: false
+
+######### Rails ##########
+Rails:
+  Enabled: true
+  Exclude:
+    - 'lib/**/*'
+Rails/FilePath:
+  Enabled: false
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+Rails/CreateTableWithTimestamps:
+  Enabled: true
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+Rails/HttpStatus:
+  Enabled: false
+
+######### Metrics ##########
+Metrics/ClassLength:
+  Max: 300
+Metrics/MethodLength:
+  Max: 30
+  Exclude:
+    - 'db/migrate/*'
+Metrics/AbcSize:
+  Max: 25
+  Exclude:
+    - 'db/migrate/*'
+Metrics/PerceivedComplexity:
+  Max: 10
+Metrics/CyclomaticComplexity:
+  Max: 10
+Metrics/BlockLength:
+  Max: 50
+  Exclude:
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'spec/**/*'
+
+######### Layout ##########
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+Layout/EmptyLineAfterMagicComment:
+  Enabled: false
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - 'spec/**/*'
+    - 'db/migrate/*'
+    - 'config/schedule/**/*'
+
+######### Style ##########
+Style/MultilineBlockChain:
+  Enabled: false
+Style/SignalException:
+  EnforcedStyle: semantic
+Style/DoubleNegation:
+  Enabled: false
+Style/NumericPredicate:
+  Enabled: false
+Style/EmptyElse:
+  EnforcedStyle: empty
+Style/ConditionalAssignment:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/FormatStringToken:
+  Enabled: false
+Style/RedundantReturn:
+  Enabled: false
+
+######### Naming ##########
+Naming/VariableNumber:
+  Enabled: false
+Naming/MethodParameterName:
+  Enabled: false
+
+######### Rspec ##########
+RSpec/LetSetup:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Max: 5
+  Exclude:
+    - 'spec/features/*'
+    - 'spec/graphql/types/*'
+RSpec/ExampleLength:
+  Max: 15
+  Exclude:
+    - 'spec/features/*'
+RSpec/AnyInstance:
+  Enabled: false
+RSpec/NestedGroups:
+  Enabled: false
+  Max: 20
+RSpec/BeEql:
+  Enabled: false
+RSpec/EmptyLineAfterFinalLet:
+  Enabled: false
+RSpec/EmptyLineAfterSubject:
+  Enabled: false
+RSpec/ContextWording:
+  Enabled: false
+RSpec/ExpectChange:
+  Enabled: false
+RSpec/HookArgument:
+  EnforcedStyle: each
+RSpec/PredicateMatcher:
+  Enabled: false
+RSpec/ImplicitSubject:
+  Enabled: false
+RSpec/EmptyLineAfterHook:
+  Enabled: false
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - 'spec/integration/**/*'
+RSpec/LeakyConstantDeclaration:
+  Exclude:
+    - 'spec/integration/**/*'
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpec/UnspecifiedException:
+  Enabled: false
+
+######## Lint #########
+Lint/BinaryOperatorWithIdenticalOperands:
+  Enabled: false
