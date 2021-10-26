@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_05_103105) do
+ActiveRecord::Schema.define(version: 2021_10_26_094419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 2020_11_05_103105) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_accounts_on_email", unique: true
+  end
+
+  create_table "employees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "email", null: false, comment: "メールアドレス"
+    t.integer "email_verification_status", default: 0, null: false, comment: "メールの認証状況"
+    t.string "email_verification_token"
+    t.string "last_notification_read_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "jtis", id: :uuid, default: -> { "gen_random_uuid()" }, comment: "JWTのホワイトリスト", force: :cascade do |t|
