@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-# ApplicationController
-class ApplicationController < ActionController::API
+# EnterpriseController
+class EnterpriseController < ActionController::API
   include ExceptionHandler
 
   before_action :authenticate_account!
@@ -18,10 +18,10 @@ class ApplicationController < ActionController::API
 
   def authenticate_account!
     @current_jwt = /Bearer (.*)/.match(request.headers[:Authorization]).to_a[1]
-    @current_user = Account.authenticate!(@current_jwt)
+    @current_user = Employee.authenticate!(@current_jwt)
   end
 
   def current_ability
-    @current_ability ||= AccountAbility.new(current_user)
+    @current_ability ||= EmployeeAbility.new(current_user)
   end
 end
