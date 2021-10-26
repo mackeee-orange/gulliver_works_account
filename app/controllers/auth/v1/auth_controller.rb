@@ -3,7 +3,7 @@ module Auth
   module V1
     # AuthController
     class AuthController < ApplicationController
-      skip_before_action :authenticate_account!
+      skip_before_action :authenticate_account!, except: %i[verify_new_email]
 
       def sign_in
         account = Account.find_by(
@@ -15,7 +15,7 @@ module Auth
 
       def sign_up
         account = Account.create!(resource_params)
-        AccountMailer.verification_email(@account.id).deliver_later
+        AccountMailer.verification_email(account.id).deliver_later
         render json: account, status: :created, serializer: AccountWithTokenSerializer
       end
 
@@ -28,9 +28,9 @@ module Auth
           email_verification_status: Account::EmailVerificationStatus::VERIFIED,
           email_verification_token: nil
         )
-          redirect_to completed_verify_email_url
+          redirect_to auth_v1_completed_verify_email_url
         else
-          redirect_to failed_verify_email_url
+          redirect_to auth_v1_failed_verify_email_url
         end
       end
 
