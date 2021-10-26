@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       post :sign_in, to: 'auth#sign_in'
       post :sign_up, to: 'auth#sign_up'
+      get :verify_email, to: 'auth#verify_email'
+      post :verify_new_email, to: 'auth#verify_new_email'
+      get :completed_verify_email, to: 'auth#completed_verify_email'
+      get :failed_verify_email, to: 'auth#failed_verify_email'
     end
   end
 
