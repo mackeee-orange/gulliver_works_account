@@ -15,7 +15,30 @@ module Auth
 
       def sign_up
         account = Account.create!(resource_params)
+        AccountMailer.verification_email(@account.id).deliver_later
         render json: account, status: :created, serializer: AccountWithTokenSerializer
+      end
+
+      # アドレス確認（新規登録時）
+      def verify_email
+        account = Account.find_by(email_verification_token: params[:token])
+        return head 403 if params[:token].blank? || account.blank?
+
+        account.update!(
+          email_verification_status: Account::EmailVerificationStatus::VERIFIED,
+          email_verification_token: nil
+        )
+        redirect_to URL::FrontEndUrls::GENERAL_EMAIL_CONFIRMED_URL
+      end
+
+      # アドレス確認（アドレス変更時）
+      def verify_new_email
+        account = Account.find_by(email_verification_token: params[:token])
+        fail ActiveRecord::RecordNotFound if params[:token].blank? || account.blank?
+
+        authorize! :manage, account
+        account.update!(email: params[:email], email_verification_token: nil)
+        head 204
       end
 
       private
