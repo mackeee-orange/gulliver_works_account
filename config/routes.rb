@@ -18,6 +18,13 @@ Rails.application.routes.draw do
     resources :accounts, only: %i[show update destroy]
   end
 
+  # Enterprise API
+  namespace :enterprise do
+    namespace :v1 do
+      resources :employees, only: %i[show update destroy]
+    end
+  end
+
   namespace :enterprise_auth do
     namespace :v1 do
       post :sign_in, to: 'auth#sign_in'
