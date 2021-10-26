@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 # Ability
-class Ability
+class AccountAbility
   include CanCan::Ability
 
   def initialize(account)
