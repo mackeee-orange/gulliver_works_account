@@ -12,6 +12,5 @@ Rails6（REST API）+ Docker + PostgreSQL + Auth機能（GulliverWorks用）
 6. `http://localhost:3000/`にアクセスし、「Yay! You’re on Rails!」の表示が出ていれば完了
 
 ### Makefile
-
 弊社ではMakefileを準備してあります。
 頻出コマンドについては「make XXX」で実行できるようにしてあるので、Makefileを確認してみましょう。
